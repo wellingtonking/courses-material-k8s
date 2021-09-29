@@ -1,0 +1,68 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: nginx-deployment
+  labels:
+    charle: architecte
+spec:
+  selector:
+    matchLabels:
+      app: nginx-app
+  replicas: 3
+  template:
+
+    metadata:
+      labels:
+        app: nginx-app
+    spec:
+      containers:
+        - name: nginx
+          image: nginx:stable-alpine
+          ports:
+            - name: std-http-port
+              containerPort: 80
+            - name: admin-http-port
+              containerPort: 8080
+              protocol: TCP
+
+          env:
+            - name: DEMO
+              value: "Hello"
+
+          envFrom:
+            - secretRef:
+                name: test-secret
+
+          volumeMounts:
+            - name: test-configmap-reference
+              mountPath: "/etc/test-configmap-reference"
+              readOnly: true
+      volumes:
+        - name: test-configmap-reference
+          configMap:
+            name: test-configmap
+
+---
+
+apiVersion: v1
+kind: Secret
+metadata:
+  name: test-secret
+stringData:
+  extra: abc
+
+type: Opaque
+
+---
+
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: test-configmap
+data:
+  ENABLE_SWITCH_A: "true"
+  my_ini_file: |
+    car.1.brand = Tesla
+    car.1.autonomy = 550km
+    car.2.brand = Mazda
+    car.2.autonomy = 120km

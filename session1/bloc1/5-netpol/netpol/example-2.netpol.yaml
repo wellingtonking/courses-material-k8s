@@ -1,0 +1,18 @@
+apiVersion: networking.k8s.io/v1
+kind: NetworkPolicy
+metadata:
+  name: allow-ingress-from-essential-namespaces
+spec:
+  ingress:
+  - from:
+    - podSelector: {}
+    - namespaceSelector:
+        matchLabels:
+          namespace: ingress-nginx
+    - namespaceSelector:
+        matchLabels:
+          namespace: kube-system
+  podSelector: {}
+  policyTypes:
+  - Ingress
+

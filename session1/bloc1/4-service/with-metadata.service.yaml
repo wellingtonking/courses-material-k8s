@@ -1,0 +1,17 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: ngnix-lb
+  annotations:
+    # Exemples d'annotations que l'on pourrait ajouter a l'itention du fournisseur Cloud:
+    service.beta.kubernetes.io/do-loadbalancer-protocol: "http"
+    service.beta.kubernetes.io/do-loadbalancer-size-slug: "lb-large"
+spec:
+  type: LoadBalancer
+  selector:
+    app: nginx-app
+  ports:
+    - name: http
+      protocol: TCP
+      port: 80
+      targetPort: 80

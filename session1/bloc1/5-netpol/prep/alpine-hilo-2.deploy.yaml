@@ -1,0 +1,19 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: alpine-hilo-2
+  namespace: hilo-2
+spec:
+  selector:
+    matchLabels:
+      app: alpine-hilo-2
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        app: alpine-hilo-2
+    spec:
+      containers:
+      - name: alpine-hilo-2
+        image: alpine:3
+        command: ["/bin/sh", "-ec", "sleep 3600"]

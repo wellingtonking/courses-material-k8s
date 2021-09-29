@@ -1,0 +1,38 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: nginx-deployment
+  labels:
+    charle: architecte
+spec:
+  selector:
+    matchLabels:
+      app: nginx-app
+  replicas: 2
+  template:
+
+    metadata:
+      labels:
+        app: nginx-app
+    spec:
+      containers:
+      - name: nginx
+        image: nginx:stable-alpine
+        ports:
+        - containerPort: 80
+
+        env:
+          - name: DEMO
+            value: "Hello"
+
+        volumeMounts:
+          - name: test-configmap-charle-ref
+            mountPath: "/etc/charle"
+            readOnly: true
+
+      volumes:
+        - name: test-configmap-charle-ref
+          configMap:
+            name: test-configmap
+
+

@@ -1,0 +1,16 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: nginx-demo
+  labels:
+    foo: bar
+spec:
+  containers:
+  - image: nginx:stable-alpine
+    name: nginx
+    ports:
+    - containerPort: 80
+      protocol: TCP
+
+
+
