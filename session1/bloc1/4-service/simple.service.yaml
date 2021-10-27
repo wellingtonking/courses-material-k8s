@@ -3,7 +3,7 @@ kind: Service
 metadata:
   name: ngnix-cluster-ip
 spec:
-  type: ClusterIP
+  type: ClusterIP # <- Within the cluster network overlay
   selector:
     app: nginx-app
   ports:
