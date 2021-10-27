@@ -21,6 +21,9 @@ spec:
         ports:
         - containerPort: 80
 
+#        command: [ "sleep", "600" ]  # Debug tip example
+#        args: [ "300" ]
+
         env:
           - name: DEMO
             value: "Hello"
