@@ -1,0 +1,14 @@
+apiVersion: networking.k8s.io/v1
+kind: NetworkPolicy
+metadata:
+  name: allow-all-to-pod-identity-webhook.ingress
+spec:
+  podSelector:
+    matchLabels:
+      "app.kubernetes.io/name": "aws-pod-identity-webhook"
+  ingress: 
+  - from:
+    - ipBlock:
+        cidr: 100.0.0.0/8
+  policyTypes:
+  - Ingress
