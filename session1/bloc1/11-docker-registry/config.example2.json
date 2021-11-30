@@ -1,0 +1,10 @@
+{
+  "auths": {
+    "your.private.registry.example.com": {
+      "username": "janedoe",
+      "password": "xxxxxxxxxxx",
+      "email": "jdoe@example.com",
+      "auth": "c3R...zE2"
+    }
+  }
+}

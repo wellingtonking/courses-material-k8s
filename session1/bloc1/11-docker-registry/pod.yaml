@@ -1,0 +1,10 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: my-internal-application
+spec:
+  containers:
+  - name: my-internal-application
+    image: harbor.wkng.net/prod/internal-application:my-version
+  imagePullSecrets:
+  - name: harbor-registry-auth-secret
